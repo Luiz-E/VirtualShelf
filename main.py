@@ -1,34 +1,35 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return redirect(url_for("user", usr="guest"))
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    return render_template("login.html")
+    if request.method == "POST":
+         user = request.form["nm"]
+         return redirect(url_for("user",usr=user))
+    else:
+        return render_template("login.html")
 
-@app.route("/cadastro")
-def cadastro():
-    return render_template("cadastro.html")
+@app.route("/cadastro", methods=["POST", "GET"])
+def cadastrar():
+    if request.method == "POST":
+        user = request.form["nm"]
+        return redirect(url_for("user", usr=user))
+    else:
+        return render_template("cadastro.html")
 
-@app.route("/<usuario>")
-def inicio(usuario):
-    return render_template("usuario.html", nome = usuario)
 
-@app.route("/<usuario>/lista-de-desejos")
-def lista(usuario):
-    return render_template("lista.html", nome = usuario)
+@app.route("/<usr>")
+def user(usr):
+    return render_template("usuario.html", usr=usr)
 
-@app.route("/<usuario>/estante")
-def estante(usuario):
-    return render_template("estante.html", nome = usuario)
-
-@app.route("/<usuario>/configuracoes")
-def config(usuario):
-    return render_template("config.html", nome = usuario)
-
-@app.route("/logout")
-def logout():
-    return redirect(url_for("login"))
+@app.route("/<usr>/lista")
+def lista(usr):
+    return render_template("lista.html", usr=usr)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug="True")
