@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <title>{% block title%} {% endblock %}</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
     </head>
     <body>
         <nav>
             <div class="logo"><img src="{{url_for('static', filename='img/logo.png')}}" align="middle" /></div>
             <div class="navbar">
-                <span><a href="/user"><i class="ti ti-home"></i>Início</a></span>
-                <span><a href="/user/estante"><i class="fa-duotone fa-lines-leaning"></i>Estante</a></span>
+                <span
+                    ><a href="/user"><i class="ti ti-home"></i>Início</a></span
+                >
+                <span
+                    ><a href="/user/estante"><i class="fa-duotone fa-lines-leaning"></i>Estante</a></span
+                >
                 <span><a href="/user/lista">Lista de Desejos</a></span>
             </div>
         </nav>
         <main>
             <a href="#"><i class="ti ti-settings"></i></a>
-            {%block content%}
-            {% endblock %}
+            {%block content%} {% endblock %}
         </main>
     </body>
 </html>
